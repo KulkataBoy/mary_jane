@@ -18,13 +18,46 @@ void main() {
 
   ));
 }
-
-class Rectifier {}
-class TestPoint {
-
-
-  
+class TPConnect {
+  int id;
+  String name;
+  String color;
+  int onValue;
+  int offValue;
+  String refCellType;
+  int shuntId;
+  int rectId;
+  int pipelineId;
+  int nativeValue;
+  double couponCurrent;
+  String comment;
+  int timeCreated;
+  int timeChanged;
 }
+class Shunt {}
+class Rectifier {
+  int id;
+  String name;
+  String type;
+  List<String> pic;
+
+}
+class TestPoint {
+  int id;
+  String name;
+  String type;
+  String typeOther;
+  String comment;
+  double gpsLat;
+  double gpsLon;
+  int surveyId;
+  List<Shunt> shuntList;
+  List<TPConnect> tpConnectList;
+  int timeCreated;
+  int timeChanged;
+  List<String> pic;
+}
+class Pipeline {}
 
 class PipelineSurveyData
 
@@ -37,7 +70,7 @@ class PipelineSurveyData
   int timeChanged;
   List<Rectifier> rectifierList;
   List<TestPoint> testPointList;
-
+  List<Pipeline> pipelineList;
 }
 
 class NewPipelineSurvey extends StatelessWidget {
