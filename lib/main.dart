@@ -1,6 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_app/style.dart';
 
+
+
+
+
 void main() {
   runApp(MaterialApp(
     title: 'CorrSurfer',
@@ -14,6 +18,26 @@ void main() {
   ));
 }
 
+class Rectifier {}
+class TestPoint {
+
+
+  
+}
+
+class PipelineSurveyData
+
+{
+  int id;
+  String name;
+  String gpsFormat;
+  int creatorId;
+  int timeCreated;
+  int timeChanged;
+  List<Rectifier> rectifierList;
+  List<TestPoint> testPointList;
+
+}
 
 class NewPipelineSurvey extends StatelessWidget {
   @override
