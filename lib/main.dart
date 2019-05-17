@@ -12,6 +12,7 @@ void main() {
     routes: {
       '/': (context) => Menu(),
       '/NPS': (context) => NewPipelineSurvey(),
+      '/NTS': (context) => NewTankSurvey(),
     },
     debugShowCheckedModeBanner: false,
 
@@ -44,7 +45,27 @@ class NewPipelineSurvey extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Second Route"),
+        title: Text("Pipeline Survey"),
+      ),
+      body: Center(
+        child: RaisedButton(
+          onPressed: () {
+            Navigator.pushNamed(context, '/');
+          },
+          child: Text('Go back!'),
+        ),
+      ),
+    );
+  }
+}
+
+
+class NewTankSurvey extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Text("Tank Survey"),
       ),
       body: Center(
         child: RaisedButton(
@@ -71,7 +92,7 @@ class Menu extends StatelessWidget {
     child: new Column (
     children: <Widget>[
       new FlatButton (onPressed: () {Navigator.pushNamed(context, '/NPS');}, child: new Ah1('Pipeline Survey') ),
-      new FlatButton (onPressed: () {Navigator.pushNamed(context, '/NPS');}, child: new Ah1('Tank Survey') )
+      new FlatButton (onPressed: () {Navigator.pushNamed(context, '/NTS');}, child: new Ah1('Tank Survey') )
     ])
     )
     );
