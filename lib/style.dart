@@ -5,7 +5,7 @@ class Ah1 extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return new Text (_ah1Text,
-        style: new TextStyle(fontSize: 30.0), overflow: TextOverflow.ellipsis, textAlign: TextAlign.left,);
+        style: new TextStyle(fontSize: 30.0,), overflow: TextOverflow.ellipsis, textAlign: TextAlign.left,);
   }
 }
 

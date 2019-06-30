@@ -14,7 +14,7 @@ void main() {
     initialRoute: '/',
     routes: {
       '/': (context) => Menu(),
-      '/NPS': (context) => NewPipelineSurvey(),
+      '/NPS': (context) => PointScreen(),
       '/NTS': (context) => NewTankSurvey(),
     },
     debugShowCheckedModeBanner: false,
@@ -394,21 +394,72 @@ Map<String, dynamic> _rectifierCircuitToJson(RectifierCircuit ins) {
   };
 }
 
-class NewPipelineSurvey extends StatelessWidget {
+class PointScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Pipeline Survey"),
+        title: Text("New Point"),
       ),
-      body: Center(
-        child: RaisedButton(
-          onPressed: () {
-            Navigator.pushNamed(context, '/');
-          },
-          child: Text('Go back!'),
-        ),
+      body: new Container(
+        padding: const EdgeInsets.all(16.0),  // Padding for body area
+      child: new Column (
+          crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          new Container( //Status Bar at the top Modified | Created
+            color: Colors.lightBlue[50],
+            alignment: FractionalOffset.centerLeft,
+            child: new Text('Modified | Created'),
+          ),
+
+        //-----------------------------------------------------------------------------------------------------------
+
+          new Container( //block of lable and field
+            alignment: FractionalOffset.center,
+            child: new Column (
+              children: <Widget>[
+                new Container(
+                  alignment: FractionalOffset.centerLeft,
+                  child: new Text("Name", style: TextStyle(fontFamily: 'Bold', fontWeight: FontWeight.bold)),
+                ),
+                new Container(
+                    alignment: FractionalOffset.center,
+                    margin: const EdgeInsets.only(top: 4.0),
+                  child:  new TextFormField(
+                      maxLength: 32,
+                      decoration: new InputDecoration(
+                          hintText: 'Name of point',
+                        counterText: "",
+                        contentPadding: const EdgeInsetsDirectional.only(start: 10.0, top: 10.0, end: 10.0, bottom: 10.0),
+                        filled: true,
+                          fillColor: Colors.blue[50],
+                          focusedBorder: OutlineInputBorder(
+                            borderSide: BorderSide(color: Colors.black26, width: 1.0),
+                              borderRadius: const BorderRadius.all(
+                                const Radius.circular(11),
+                              ),
+                          ),
+                          enabledBorder: OutlineInputBorder(
+                            borderSide: BorderSide(color: Colors.grey[300], width: 1.0),
+                              borderRadius: const BorderRadius.all(
+                                const Radius.circular(11),
+                              ),
+                            ),
+                          )
+                )
+                )
+              ],
+            )
+          ),
+
+          //----------------------------------------------------------------------------------------------------------
+
+
+        ]
       ),
+      ),
+
+
     );
   }
 }
@@ -445,7 +496,7 @@ class Menu extends StatelessWidget {
       padding: new EdgeInsets.all(32.0),
     child: new Column (
     children: <Widget>[
-      new FlatButton (onPressed: () {Navigator.pushNamed(context, '/NPS');}, child: new Ah1('Pipeline Survey') ),
+      new FlatButton (onPressed: () {Navigator.pushNamed(context, '/NPS');}, child: new Text("dsd", style: new TextStyle(fontFamily: 'Thin')) ),
       new FlatButton (onPressed: () {Navigator.pushNamed(context, '/NTS');}, child: new Ah1('Tank Survey') )
     ])
     )
