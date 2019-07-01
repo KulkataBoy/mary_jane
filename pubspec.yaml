@@ -1,4 +1,4 @@
-name: flutter_app
+name: mary_jane
 description: A new Flutter application.
 
 # The following defines the version and build number for your application.
@@ -31,21 +31,16 @@ dev_dependencies:
 
 # The following section is specific to Flutter.
 flutter:
-fonts:
-  - family: Light
-    fonts:
-      - asset: ./fonts/Lato-Light.ttf
-
-  - family: Regular
-    fonts:
-      - asset: fonts/Lato-Regular.ttf
-
-  - family: Bold
-    fonts:
-      - asset: fonts/Lato-Bold.ttf
-
-  - family: Thin
-    fonts:
-      - asset: ./fonts/Lato-Thin.ttf
-
-uses-material-design: false
+  fonts:
+    - family: LatoRegular
+      fonts:
+        - asset: fonts/Lato-Regular.ttf
+        - asset: fonts/Lato-Italic.ttf
+          style: italic
+    - family: LatoThin
+      fonts:
+        - asset: fonts/Lato-Thin.ttf
+    - family: LatoBold
+      fonts:
+        - asset: fonts/Lato-Bold.ttf
+uses-material-design: true

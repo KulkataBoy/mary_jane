@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_app/style.dart';
+import 'package:mary_jane/style.dart';
 import 'dart:convert';
 
 
@@ -221,13 +221,13 @@ Map<String, dynamic> _testPointToJson(TestPoint ins) {
     'id': ins.id,
     'name': ins.name,
     'type': ins.type,
-  'typeOther': ins.typeOther,
-  'comment': ins.comment,
-  'gpsLat': ins.gpsLat,
-  'gpsLon': ins.gpsLon,
-  'surveyId': ins.surveyId,
-  'shuntList': shunts,
-  'structureList': structures,
+    'typeOther': ins.typeOther,
+    'comment': ins.comment,
+    'gpsLat': ins.gpsLat,
+    'gpsLon': ins.gpsLon,
+    'surveyId': ins.surveyId,
+    'shuntList': shunts,
+    'structureList': structures,
     'anodeList': anodes,
     'refCellList': refCells,
     'timeCreated': ins.timeCreated,
@@ -399,17 +399,17 @@ class PointScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("New Point"),
+        title: AppBarText("New Point"),
       ),
       body: new Container(
-        padding: const EdgeInsets.all(16.0),  // Padding for body area
+        padding: const EdgeInsets.only(top: 6.0, left: 16.0, right: 16.0, bottom: 16.0),  // Padding for body area
       child: new Column (
           crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           new Container( //Status Bar at the top Modified | Created
-            color: Colors.lightBlue[50],
+            margin: const EdgeInsets.only(bottom: 9.0),
             alignment: FractionalOffset.centerLeft,
-            child: new Text('Modified | Created'),
+            child: new Text('Modified | Created:', style: statusText),
           ),
 
         //-----------------------------------------------------------------------------------------------------------
@@ -420,13 +420,14 @@ class PointScreen extends StatelessWidget {
               children: <Widget>[
                 new Container(
                   alignment: FractionalOffset.centerLeft,
-                  child: new Text("Name", style: TextStyle(fontFamily: 'Bold', fontWeight: FontWeight.bold)),
+                  child: new FormLabel("Name"),
                 ),
                 new Container(
                     alignment: FractionalOffset.center,
                     margin: const EdgeInsets.only(top: 4.0),
                   child:  new TextFormField(
                       maxLength: 32,
+                      style: new TextStyle(fontSize: 18.0, fontFamily: 'LatoThin', fontWeight: FontWeight.w300, color: Colors.black),
                       decoration: new InputDecoration(
                           hintText: 'Name of point',
                         counterText: "",
@@ -496,8 +497,18 @@ class Menu extends StatelessWidget {
       padding: new EdgeInsets.all(32.0),
     child: new Column (
     children: <Widget>[
-      new FlatButton (onPressed: () {Navigator.pushNamed(context, '/NPS');}, child: new Text("dsd", style: new TextStyle(fontFamily: 'Thin')) ),
-      new FlatButton (onPressed: () {Navigator.pushNamed(context, '/NTS');}, child: new Ah1('Tank Survey') )
+      new FlatButton (onPressed: () {Navigator.pushNamed(context, '/NPS');}, child: new Text('Roboto Mono sample',
+          style: new TextStyle(
+            color: Colors.black87,
+            fontFamily: 'LatoRegular',
+            fontWeight: FontWeight.w700,
+            fontSize: 25.0,
+          )), ),
+      new FlatButton (onPressed: () {Navigator.pushNamed(context, '/NTS');}, child: new Ah1('Tank Survey') ),
+        new Text(
+          'FontThin',
+          style: TextStyle(fontFamily: 'LatoThin', fontSize: 25.0, fontWeight: FontWeight.w100,),
+        ),
     ])
     )
     );
