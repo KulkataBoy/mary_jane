@@ -394,15 +394,24 @@ Map<String, dynamic> _rectifierCircuitToJson(RectifierCircuit ins) {
   };
 }
 
-class PointScreen extends StatelessWidget {
+class PointScreen extends StatefulWidget {
   @override
+  State<StatefulWidget> createState() {
+    return _PointScreenState();
+  }
+}
+
+class _PointScreenState extends State<PointScreen> {
+  var _tpTypes = ['Rupees', 'Dollars', 'Pounds', 'Others'];
+  var _currentTPType = '';
+
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         title: AppBarText("New Point"),
       ),
       body: new Container(
-        padding: const EdgeInsets.only(top: 6.0, left: 16.0, right: 16.0, bottom: 16.0),  // Padding for body area
+        padding: const EdgeInsets.only(top: 6.0, left: 8.0, right: 8.0, bottom: 16.0),  // Padding for body area
       child: new Column (
           crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -416,42 +425,94 @@ class PointScreen extends StatelessWidget {
 
           new Container( //block of lable and field
             alignment: FractionalOffset.center,
-            child: new Column (
-              children: <Widget>[
-                new Container(
-                  alignment: FractionalOffset.centerLeft,
-                  child: new FormLabel("Name"),
-                ),
-                new Container(
-                    alignment: FractionalOffset.center,
-                    margin: const EdgeInsets.only(top: 4.0),
-                  child:  new TextFormField(
-                      maxLength: 32,
-                      style: new TextStyle(fontSize: 18.0, fontFamily: 'LatoThin', fontWeight: FontWeight.w300, color: Colors.black),
-                      decoration: new InputDecoration(
-                          hintText: 'Name of point',
-                        counterText: "",
-                        contentPadding: const EdgeInsetsDirectional.only(start: 10.0, top: 10.0, end: 10.0, bottom: 10.0),
-                        filled: true,
-                          fillColor: Colors.blue[50],
-                          focusedBorder: OutlineInputBorder(
-                            borderSide: BorderSide(color: Colors.black26, width: 1.0),
-                              borderRadius: const BorderRadius.all(
-                                const Radius.circular(11),
-                              ),
-                          ),
-                          enabledBorder: OutlineInputBorder(
-                            borderSide: BorderSide(color: Colors.grey[300], width: 1.0),
-                              borderRadius: const BorderRadius.all(
-                                const Radius.circular(11),
-                              ),
-                            ),
-                          )
-                )
-                )
-              ],
-            )
+
+              child: Card(
+                  child: new Container(
+                    padding: const EdgeInsets.only(top: 6.0, left: 16.0, right: 16.0, bottom: 16.0),
+                    child: new Column (
+                  children: [new TField('eg. TP-01', 'Name'),new TField('eg. Test Station', 'Type'),
+
+
+
+        new Container(
+          decoration: new BoxDecoration(
+
+            borderRadius: const BorderRadius.all(
+              const Radius.circular(7),
+            ),
+            border: Border.all(
+                color: Colors.black38, width: 1.0),
           ),
+          child:  DropdownButton(
+                      isExpanded: true,
+                      isDense: false,
+                      items: _tpTypes.map((String dropDownStringItem) {
+                        return DropdownMenuItem<String>(
+                          value: dropDownStringItem,
+                          child: Text(dropDownStringItem),
+                        );
+                      }).toList(),
+
+                      onChanged: (String newValueSelected) {
+                        // Your code to execute, when a menu item is selected from drop down
+                        _onDropDownItemSelected(newValueSelected);
+                      },
+
+                      value: _currentTPType,
+                      style: new TextStyle(fontSize: 16.0, fontFamily: 'LatoRegular', fontWeight: FontWeight.w300, color: Colors.black),
+
+                    ),
+)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                  ]
+              ),
+              ),
+          ),
+            ),
 
           //----------------------------------------------------------------------------------------------------------
 
@@ -463,7 +524,14 @@ class PointScreen extends StatelessWidget {
 
     );
   }
+  void _onDropDownItemSelected(String newValueSelected) {
+    setState(() {
+      this._currentTPType = newValueSelected;
+    });
+  }
+
 }
+
 
 
 class NewTankSurvey extends StatelessWidget {
