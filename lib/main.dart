@@ -400,11 +400,31 @@ class PointScreen extends StatefulWidget {
     return _PointScreenState();
   }
 }
+List<String> _tpTypes = ['Rubles', 'Dollars', 'Pounds', 'Other'];
+
+class ListMenuGen { // Generates DropdownButtonItem objects for the list of string data.
+List<String> listOfItems;
+ListMenuGen();
+
+List<DropdownMenuItem<String>> gen1 (List<String> listOfItems) { //gen 1 adds Select Type Lable at the begining of the list of data
+  List<DropdownMenuItem<String>> listOfItemsRes = listOfItems.map((String dropDownStringItem) {
+    return DropdownMenuItem<String>(
+      value: dropDownStringItem,
+      child: Text(dropDownStringItem),
+    );
+  }).toList();
+  listOfItemsRes.insert(0,DropdownMenuItem<String>(
+    value: 'Select Type',
+    child: Text('Select Type', style: new TextStyle(fontFamily: 'LatoRegular', fontWeight: FontWeight.w300, color: Colors.black54)),
+  ));
+return listOfItemsRes;
+}
+}
+
 
 class _PointScreenState extends State<PointScreen> {
-  var _tpTypes = ['Rupees', 'Dollars', 'Pounds', 'Others'];
-  var _currentTPType = '';
-
+  var _currentTPType = 'Select Type';
+  Widget otherTypeField = new Container();
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
@@ -428,13 +448,18 @@ class _PointScreenState extends State<PointScreen> {
 
               child: Card(
                   child: new Container(
-                    padding: const EdgeInsets.only(top: 6.0, left: 16.0, right: 16.0, bottom: 16.0),
+                    padding: const EdgeInsets.only(left: 10.0, top: 13.0, right: 10.0, bottom: 10.0),
                     child: new Column (
-                  children: [new TField('eg. TP-01', 'Name'),new TField('eg. Test Station', 'Type'),
+                  children: [new TFieldLable('Name', 'eg. TP-01'),new Container(
+                    alignment: FractionalOffset.centerLeft,
+                    child: new FormLabel('Type'),
+                  ),
 
 
 
         new Container(
+          margin: const EdgeInsets.only(top: 4.0, bottom: 13.0),
+          padding: const EdgeInsets.only(top: 8.0, left: 10.0, right: 16.0, bottom: 8.0),
           decoration: new BoxDecoration(
 
             borderRadius: const BorderRadius.all(
@@ -443,18 +468,14 @@ class _PointScreenState extends State<PointScreen> {
             border: Border.all(
                 color: Colors.black38, width: 1.0),
           ),
-          child:  DropdownButton(
+          child:  DropdownButtonHideUnderline (
+            child: DropdownButton(
+                      icon: Icon(Icons.arrow_drop_down, color: Colors.black38),
                       isExpanded: true,
-                      isDense: false,
-                      items: _tpTypes.map((String dropDownStringItem) {
-                        return DropdownMenuItem<String>(
-                          value: dropDownStringItem,
-                          child: Text(dropDownStringItem),
-                        );
-                      }).toList(),
+                      isDense: true,
+                      items:  new ListMenuGen().gen1(_tpTypes),
 
                       onChanged: (String newValueSelected) {
-                        // Your code to execute, when a menu item is selected from drop down
                         _onDropDownItemSelected(newValueSelected);
                       },
 
@@ -462,51 +483,9 @@ class _PointScreenState extends State<PointScreen> {
                       style: new TextStyle(fontSize: 16.0, fontFamily: 'LatoRegular', fontWeight: FontWeight.w300, color: Colors.black),
 
                     ),
-)
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+                  ),
+),
+                    otherTypeField,
 
                   ]
               ),
@@ -527,6 +506,12 @@ class _PointScreenState extends State<PointScreen> {
   void _onDropDownItemSelected(String newValueSelected) {
     setState(() {
       this._currentTPType = newValueSelected;
+      if (_currentTPType == 'Other'){
+        this.otherTypeField = new TField('Type Other');
+      }
+      else {
+        this.otherTypeField = new Container();
+      }
     });
   }
 
