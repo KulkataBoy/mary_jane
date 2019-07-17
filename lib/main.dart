@@ -402,24 +402,6 @@ class PointScreen extends StatefulWidget {
 }
 List<String> _tpTypes = ['Rubles', 'Dollars', 'Pounds', 'Other'];
 
-class ListMenuGen { // Generates DropdownButtonItem objects for the list of string data.
-List<String> listOfItems;
-ListMenuGen();
-
-List<DropdownMenuItem<String>> gen1 (List<String> listOfItems) { //gen 1 adds Select Type Lable at the begining of the list of data
-  List<DropdownMenuItem<String>> listOfItemsRes = listOfItems.map((String dropDownStringItem) {
-    return DropdownMenuItem<String>(
-      value: dropDownStringItem,
-      child: Text(dropDownStringItem),
-    );
-  }).toList();
-  listOfItemsRes.insert(0,DropdownMenuItem<String>(
-    value: 'Select Type',
-    child: Text('Select Type', style: new TextStyle(fontFamily: 'LatoRegular', fontWeight: FontWeight.w300, color: Colors.black54)),
-  ));
-return listOfItemsRes;
-}
-}
 
 
 class _PointScreenState extends State<PointScreen> {
@@ -473,7 +455,7 @@ class _PointScreenState extends State<PointScreen> {
                       icon: Icon(Icons.arrow_drop_down, color: Colors.black38),
                       isExpanded: true,
                       isDense: true,
-                      items:  new ListMenuGen().gen1(_tpTypes),
+                      items:  new  ListOptionSetting().genList(_tpTypes,1),
 
                       onChanged: (String newValueSelected) {
                         _onDropDownItemSelected(newValueSelected);
@@ -486,6 +468,7 @@ class _PointScreenState extends State<PointScreen> {
                   ),
 ),
                     otherTypeField,
+                    OField(_tpTypes, 1, _tpTypes[0]),
 
                   ]
               ),
@@ -562,6 +545,8 @@ class Menu extends StatelessWidget {
           'FontThin',
           style: TextStyle(fontFamily: 'LatoThin', fontSize: 25.0, fontWeight: FontWeight.w100,),
         ),
+      OField(_tpTypes, 1, _tpTypes[0])
+
     ])
     )
     );

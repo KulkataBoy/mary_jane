@@ -1,5 +1,42 @@
 import 'package:flutter/material.dart';
 
+class ListOptionSetting {
+  // Generates DropdownButtonItem objects for the list of string data.
+    ListOptionSetting();
+
+
+  List<DropdownMenuItem<String>> genList(List<String> listOfItems,
+      int typeOfGen) {
+    //gen 1 adds Select Type Lable at the begining of the list of data
+
+    if (typeOfGen == 1) {
+      List<DropdownMenuItem<String>> listOfItemsRes = listOfItems.map((
+          String dropDownStringItem) {
+        return DropdownMenuItem<String>(
+          value: dropDownStringItem,
+          child: Text(dropDownStringItem),
+        );
+      }).toList();
+      listOfItemsRes.insert(0, DropdownMenuItem<String>(
+        value: 'Select Type',
+        child: Text(
+            'Select Type', style: new TextStyle(fontFamily: 'LatoRegular',
+            fontWeight: FontWeight.w300,
+            color: Colors.black54)),
+      ));
+      return listOfItemsRes;
+    }
+
+
+  }
+
+  void actionPicker(int param) {
+    if (param == 1) {
+
+    }
+  }
+}
+
 //-----------FONTS-----------------------------------
 
 class Ah1 extends StatelessWidget {
@@ -112,5 +149,70 @@ class TField extends StatelessWidget {
             )
         )
     );
+  }
+}
+
+
+
+class OField extends StatefulWidget {
+  final int typeOfGen;
+  final List<String> listOfItems;
+  final String firstElement;
+  final Function action;
+  OField(this.listOfItems,this.typeOfGen,this.firstElement,[this.action]);
+  @override
+  State<StatefulWidget> createState() {
+    return _OFieldState(this.firstElement, this.action());
+  }
+}
+
+
+class _OFieldState extends State<OField> {
+  String currentElement;
+  bool actionCheck;
+  Function action;
+  _OFieldState(this.currentElement, [this.action]);
+
+  @override
+  Widget build(BuildContext context) {
+    return new Container(
+      margin: const EdgeInsets.only(top: 4.0, bottom: 13.0),
+      padding: const EdgeInsets.only(top: 8.0, left: 10.0, right: 16.0, bottom: 8.0),
+      decoration: new BoxDecoration(
+
+        borderRadius: const BorderRadius.all(
+          const Radius.circular(7),
+        ),
+        border: Border.all(
+            color: Colors.black38, width: 1.0),
+      ),
+      child:  DropdownButtonHideUnderline (
+        child: DropdownButton(
+          icon: Icon(Icons.arrow_drop_down, color: Colors.black38),
+          isExpanded: true,
+          isDense: true,
+          items:  new ListOptionSetting().genList(widget.listOfItems,1),
+
+          onChanged: (String newValueSelected) {
+           selectActivated(newValueSelected);
+          },
+
+          value: currentElement ,
+          style: new TextStyle(fontSize: 16.0, fontFamily: 'LatoRegular', fontWeight: FontWeight.w300, color: Colors.black),
+
+        ),
+      ),
+    );
+
+
+
+  }
+
+
+  void selectActivated(String newValueSelected) {
+    setState(() {
+      this.currentElement = newValueSelected;
+
+    });
   }
 }
