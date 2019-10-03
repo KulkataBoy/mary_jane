@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:mary_jane/style.dart';
+import './PointScreen.dart';
 import 'dart:convert';
 
 
@@ -468,7 +469,7 @@ class _PointScreenState extends State<PointScreen> {
                   ),
 ),
                     otherTypeField,
-                    OField(_tpTypes, 1, _tpTypes[0]),
+                    OField(1,'a',_tpTypes,_tpTypes[0]),
 
                   ]
               ),
@@ -489,15 +490,19 @@ class _PointScreenState extends State<PointScreen> {
   void _onDropDownItemSelected(String newValueSelected) {
     setState(() {
       this._currentTPType = newValueSelected;
-      if (_currentTPType == 'Other'){
+      if (_currentTPType == 'Other') {
         this.otherTypeField = new TField('Type Other');
       }
       else {
         this.otherTypeField = new Container();
       }
     });
-  }
 
+
+    void SomeFun() {
+      print('Hui');
+    }
+  }
 }
 
 
@@ -505,19 +510,8 @@ class _PointScreenState extends State<PointScreen> {
 class NewTankSurvey extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text("Tank Survey"),
-      ),
-      body: Center(
-        child: RaisedButton(
-          onPressed: () {
-            Navigator.pushNamed(context, '/');
-          },
-          child: Text('Go back!'),
-        ),
-      ),
-    );
+    return new NewPointScreen();
+
   }
 }
 
@@ -545,7 +539,7 @@ class Menu extends StatelessWidget {
           'FontThin',
           style: TextStyle(fontFamily: 'LatoThin', fontSize: 25.0, fontWeight: FontWeight.w100,),
         ),
-      OField(_tpTypes, 1, _tpTypes[0])
+      OField(1,'a',_tpTypes,_tpTypes[0])
 
     ])
     )

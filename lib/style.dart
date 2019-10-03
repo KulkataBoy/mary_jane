@@ -28,13 +28,10 @@ class ListOptionSetting {
     }
 
 
+
   }
 
-  void actionPicker(int param) {
-    if (param == 1) {
 
-    }
-  }
 }
 
 //-----------FONTS-----------------------------------
@@ -117,7 +114,6 @@ class TField extends StatelessWidget {
   Widget build(BuildContext context) {
     return new Container(
         alignment: FractionalOffset.center,
-        margin: const EdgeInsets.only(top: 4.0, bottom: 13.0),
         child: new TextFormField(
             maxLength: 32,
             style: new TextStyle(fontSize: 16.0,
@@ -156,13 +152,13 @@ class TField extends StatelessWidget {
 
 class OField extends StatefulWidget {
   final int typeOfGen;
+  final String actionType;
   final List<String> listOfItems;
   final String firstElement;
-  final Function action;
-  OField(this.listOfItems,this.typeOfGen,this.firstElement,[this.action]);
+  OField(this.typeOfGen,this.actionType,this.listOfItems,this.firstElement);
   @override
   State<StatefulWidget> createState() {
-    return _OFieldState(this.firstElement, this.action());
+    return _OFieldState(this.firstElement);
   }
 }
 
@@ -171,7 +167,7 @@ class _OFieldState extends State<OField> {
   String currentElement;
   bool actionCheck;
   Function action;
-  _OFieldState(this.currentElement, [this.action]);
+  _OFieldState(this.currentElement);
 
   @override
   Widget build(BuildContext context) {
@@ -197,7 +193,7 @@ class _OFieldState extends State<OField> {
            selectActivated(newValueSelected);
           },
 
-          value: currentElement ,
+          value: currentElement,
           style: new TextStyle(fontSize: 16.0, fontFamily: 'LatoRegular', fontWeight: FontWeight.w300, color: Colors.black),
 
         ),
@@ -212,7 +208,6 @@ class _OFieldState extends State<OField> {
   void selectActivated(String newValueSelected) {
     setState(() {
       this.currentElement = newValueSelected;
-
     });
   }
 }
