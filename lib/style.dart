@@ -8,9 +8,9 @@ class ListOptionSetting {
   List<DropdownMenuItem<String>> genList(List<String> listOfItems,
       int typeOfGen) {
     //gen 1 adds Select Type Lable at the begining of the list of data
-
+    List<DropdownMenuItem<String>> listOfItemsRes;
     if (typeOfGen == 1) {
-      List<DropdownMenuItem<String>> listOfItemsRes = listOfItems.map((
+      listOfItemsRes = listOfItems.map((
           String dropDownStringItem) {
         return DropdownMenuItem<String>(
           value: dropDownStringItem,
@@ -24,10 +24,9 @@ class ListOptionSetting {
             fontWeight: FontWeight.w300,
             color: Colors.black54)),
       ));
-      return listOfItemsRes;
+
     }
-
-
+    return listOfItemsRes;
 
   }
 
@@ -68,11 +67,11 @@ class FormLabel extends StatelessWidget {
 }
 
 class AppBarText extends StatelessWidget {
-  final String _AppBarText;
-  AppBarText(this._AppBarText);
+  final String _appBarText;
+  AppBarText(this._appBarText);
   @override
   Widget build(BuildContext context) {
-    return new Text (_AppBarText,
+    return new Text (_appBarText,
         style: new TextStyle(fontSize: 19.0, fontFamily: 'LatoThin', fontWeight: FontWeight.w600), overflow: TextOverflow.ellipsis);
   }
 }

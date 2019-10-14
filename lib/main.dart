@@ -3,10 +3,6 @@ import 'package:mary_jane/style.dart';
 import './PointScreen.dart';
 import 'dart:convert';
 
-
-
-
-
 void main() {
   final mySurvey = new TestPoint(1, "test", "Annoying one",[new Shunt(1,50,5), new Shunt(2,40,3)],[new Structure(1,'111'), new Structure(2,'222')]);
   print (json.encode(mySurvey));
@@ -497,11 +493,6 @@ class _PointScreenState extends State<PointScreen> {
         this.otherTypeField = new Container();
       }
     });
-
-
-    void SomeFun() {
-      print('Hui');
-    }
   }
 }
 
