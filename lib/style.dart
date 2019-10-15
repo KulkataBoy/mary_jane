@@ -80,7 +80,8 @@ class AppBarText extends StatelessWidget {
 
 TextStyle h1 = new TextStyle(fontSize: 14.0, fontFamily: 'LatoRegular', fontWeight: FontWeight.w200, color: Colors.grey[500]);
 TextStyle def = new TextStyle(fontSize: 14.0, fontFamily: 'LatoRegular', fontWeight: FontWeight.w200, color: Colors.grey[500]);
-TextStyle h2 = new TextStyle(fontSize: 14.0, fontFamily: 'LatoRegular', fontWeight: FontWeight.w200, color: Colors.grey[500]);
+TextStyle h2 = new TextStyle(fontSize: 18.0, fontFamily: 'LatoRegular', fontWeight: FontWeight.w200, color: Colors.black);
+TextStyle h3 = new TextStyle(fontSize: 14.0, fontFamily: 'LatoRegular', fontWeight: FontWeight.w900, color: Colors.black);
 TextStyle appBarText = new TextStyle(fontSize: 14.0, fontFamily: 'LatoRegular', fontWeight: FontWeight.w200, color: Colors.grey[500]);
 TextStyle statusText = new TextStyle(fontSize: 14.0, fontFamily: 'LatoRegular', fontWeight: FontWeight.w200, color: Colors.grey[500]);
 
@@ -93,6 +94,7 @@ class TFieldLable extends StatelessWidget {
     return new Column (
       children: <Widget>[
         new Container(
+          margin: const EdgeInsets.only(bottom: 5),
           alignment: FractionalOffset.centerLeft,
           child: new FormLabel(lable),
         ),
@@ -146,6 +148,50 @@ class TField extends StatelessWidget {
     );
   }
 }
+
+class TFieldConnection extends StatelessWidget {
+  final String hintText;
+  TFieldConnection(this.hintText);
+
+  @override
+  Widget build(BuildContext context) {
+    return new Container(
+        alignment: FractionalOffset.center,
+        child: new TextFormField(
+            maxLength: 32,
+            style: new TextStyle(fontSize: 13.0,
+                fontFamily: 'LatoRegular',
+                fontWeight: FontWeight.w300,
+                height: 1.9,
+                color: Colors.black),
+            decoration: new InputDecoration(
+              hintText: hintText,
+              hintStyle: new TextStyle(fontSize: 13.0,
+                  fontFamily: 'LatoRegular',
+                  fontWeight: FontWeight.w300),
+              counterText: "",
+              contentPadding: const EdgeInsetsDirectional.only(
+                  start: 10.0, top: 5.0, end: 10.0, bottom: 3.0),
+              filled: true,
+              fillColor: Colors.white30,
+              focusedBorder: OutlineInputBorder(
+                borderSide: BorderSide(color: Colors.blue[400], width: 1.3),
+                borderRadius: const BorderRadius.all(
+                  const Radius.circular(7),
+                ),
+              ),
+              enabledBorder: OutlineInputBorder(
+                borderSide: BorderSide(color: Colors.black38, width: 1.0),
+                borderRadius: const BorderRadius.all(
+                  const Radius.circular(7),
+                ),
+              ),
+            )
+        )
+    );
+  }
+}
+
 
 
 

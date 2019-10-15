@@ -109,7 +109,7 @@ class _NewPointScreenState extends State<NewPointScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      resizeToAvoidBottomInset: false,
+      resizeToAvoidBottomInset: true,
       appBar: AppBar(
         title: AppBarText("New Test Point"),
       ),
