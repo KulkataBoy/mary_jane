@@ -34,57 +34,14 @@ class ListOptionSetting {
 }
 
 //-----------FONTS-----------------------------------
-
-class Ah1 extends StatelessWidget {
-  final String _ah1Text;
-  Ah1(this._ah1Text);
-  @override
-  Widget build(BuildContext context) {
-    return new Text (_ah1Text,
-        style: new TextStyle(fontSize: 30.0,), overflow: TextOverflow.ellipsis, textAlign: TextAlign.left,);
-  }
-}
-
-
-class Ah2 extends StatelessWidget {
-  final String _ah2Text;
-  Ah2(this._ah2Text);
-  @override
-  Widget build(BuildContext context) {
-    return new Text (_ah2Text,
-        style: new TextStyle(fontSize: 30.0), overflow: TextOverflow.ellipsis);
-  }
-}
-
-class FormLabel extends StatelessWidget {
-  final String labelText;
-  FormLabel(this.labelText);
-  @override
-  Widget build(BuildContext context) {
-    return new Text (labelText,
-        style: new TextStyle(fontSize: 13.0, fontFamily: 'LatoBold', fontWeight: FontWeight.w900), overflow: TextOverflow.ellipsis);
-  }
-}
-
-class AppBarText extends StatelessWidget {
-  final String _appBarText;
-  AppBarText(this._appBarText);
-  @override
-  Widget build(BuildContext context) {
-    return new Text (_appBarText,
-        style: new TextStyle(fontSize: 19.0, fontFamily: 'LatoThin', fontWeight: FontWeight.w600), overflow: TextOverflow.ellipsis);
-  }
-}
-
-
-
 TextStyle h1 = new TextStyle(fontSize: 14.0, fontFamily: 'LatoRegular', fontWeight: FontWeight.w200, color: Colors.grey[500]);
 TextStyle def = new TextStyle(fontSize: 14.0, fontFamily: 'LatoRegular', fontWeight: FontWeight.w200, color: Colors.grey[500]);
 TextStyle h2 = new TextStyle(fontSize: 18.0, fontFamily: 'LatoRegular', fontWeight: FontWeight.w200, color: Colors.black);
 TextStyle h3 = new TextStyle(fontSize: 14.0, fontFamily: 'LatoRegular', fontWeight: FontWeight.w900, color: Colors.black);
 TextStyle appBarText = new TextStyle(fontSize: 14.0, fontFamily: 'LatoRegular', fontWeight: FontWeight.w200, color: Colors.grey[500]);
 TextStyle statusText = new TextStyle(fontSize: 14.0, fontFamily: 'LatoRegular', fontWeight: FontWeight.w200, color: Colors.grey[500]);
-
+TextStyle formLabel = new TextStyle(fontSize: 13.0, fontFamily: 'LatoBold', fontWeight: FontWeight.w900);
+TextStyle appBar = new TextStyle(fontSize: 19.0, fontFamily: 'LatoThin', fontWeight: FontWeight.w600);
 class TFieldLable extends StatelessWidget {
   final String lable;
   final String hintText;
@@ -96,7 +53,7 @@ class TFieldLable extends StatelessWidget {
         new Container(
           margin: const EdgeInsets.only(bottom: 5),
           alignment: FractionalOffset.centerLeft,
-          child: new FormLabel(lable),
+          child: new Text(lable, style: formLabel),
         ),
         TField(this.hintText)
       ],
@@ -129,6 +86,48 @@ class TField extends StatelessWidget {
               counterText: "",
               contentPadding: const EdgeInsetsDirectional.only(
                   start: 10.0, top: 13.0, end: 10.0, bottom: 10.0),
+              filled: true,
+              fillColor: Colors.white30,
+              focusedBorder: OutlineInputBorder(
+                borderSide: BorderSide(color: Colors.blue[400], width: 1.3),
+                borderRadius: const BorderRadius.all(
+                  const Radius.circular(7),
+                ),
+              ),
+              enabledBorder: OutlineInputBorder(
+                borderSide: BorderSide(color: Colors.black38, width: 1.0),
+                borderRadius: const BorderRadius.all(
+                  const Radius.circular(7),
+                ),
+              ),
+            )
+        )
+    );
+  }
+}
+
+class TFieldSmall extends StatelessWidget {
+  final String hintText;
+  TFieldSmall(this.hintText);
+
+  @override
+  Widget build(BuildContext context) {
+    return new Container(
+        alignment: FractionalOffset.center,
+        child: new TextFormField(
+            maxLength: 32,
+            style: new TextStyle(fontSize: 16.0,
+                fontFamily: 'LatoRegular',
+                fontWeight: FontWeight.w300,
+                color: Colors.black),
+            decoration: new InputDecoration(
+              hintText: hintText,
+              hintStyle: new TextStyle(fontSize: 16.0,
+                  fontFamily: 'LatoRegular',
+                  fontWeight: FontWeight.w300),
+              counterText: "",
+              contentPadding: const EdgeInsetsDirectional.only(
+                  start: 10.0, top: 10.0, end: 10.0, bottom: 1.0),
               filled: true,
               fillColor: Colors.white30,
               focusedBorder: OutlineInputBorder(
@@ -192,9 +191,6 @@ class TFieldConnection extends StatelessWidget {
   }
 }
 
-
-
-
 class OField extends StatefulWidget {
   final int typeOfGen;
   final String actionType;
@@ -206,7 +202,6 @@ class OField extends StatefulWidget {
     return _OFieldState(this.firstElement);
   }
 }
-
 
 class _OFieldState extends State<OField> {
   String currentElement;

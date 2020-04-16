@@ -407,7 +407,7 @@ class _PointScreenState extends State<PointScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: AppBarText("New Point"),
+        title: Text("New Point",style: appBar),
       ),
       body: new Container(
         padding: const EdgeInsets.only(top: 6.0, left: 8.0, right: 8.0, bottom: 16.0),  // Padding for body area
@@ -431,7 +431,7 @@ class _PointScreenState extends State<PointScreen> {
                     child: new Column (
                   children: [new TFieldLable('Name', 'eg. TP-01'),new Container(
                     alignment: FractionalOffset.centerLeft,
-                    child: new FormLabel('Type'),
+                    child: new Text('Type', style: formLabel),
                   ),
 
 
@@ -525,7 +525,7 @@ class Menu extends StatelessWidget {
             fontWeight: FontWeight.w700,
             fontSize: 25.0,
           )), ),
-      new FlatButton (onPressed: () {Navigator.pushNamed(context, '/NTS');}, child: new Ah1('Tank Survey') ),
+      new FlatButton (onPressed: () {Navigator.pushNamed(context, '/NTS');}, child: new Text('Tank Survey', style:h1)),
         new Text(
           'FontThin',
           style: TextStyle(fontFamily: 'LatoThin', fontSize: 25.0, fontWeight: FontWeight.w100,),
