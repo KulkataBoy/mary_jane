@@ -51,7 +51,6 @@ class TFieldLable extends StatelessWidget {
     return new Column (
       children: <Widget>[
         new Container(
-          margin: const EdgeInsets.only(bottom: 5),
           alignment: FractionalOffset.centerLeft,
           child: new Text(lable, style: formLabel),
         ),
@@ -71,6 +70,7 @@ class TField extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return new Container(
+        margin: const EdgeInsets.only(top: 4.0),
         alignment: FractionalOffset.center,
         child: new TextFormField(
             maxLength: 32,
@@ -113,9 +113,11 @@ class TFieldSmall extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return new Container(
+      margin: EdgeInsets.all(0),
+        padding: EdgeInsets.all(0),
         alignment: FractionalOffset.center,
         child: new TextFormField(
-            maxLength: 32,
+            maxLength: 6,
             style: new TextStyle(fontSize: 16.0,
                 fontFamily: 'LatoRegular',
                 fontWeight: FontWeight.w300,
@@ -127,7 +129,7 @@ class TFieldSmall extends StatelessWidget {
                   fontWeight: FontWeight.w300),
               counterText: "",
               contentPadding: const EdgeInsetsDirectional.only(
-                  start: 10.0, top: 10.0, end: 10.0, bottom: 1.0),
+                  start: 10.0, top: 12.0, end: 10.0, bottom: 0.0),
               filled: true,
               fillColor: Colors.white30,
               focusedBorder: OutlineInputBorder(
