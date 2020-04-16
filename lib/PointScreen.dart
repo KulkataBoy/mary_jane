@@ -41,6 +41,7 @@ class _NewPointScreenState extends State<NewPointScreen> {
     'Other'
   ];
   String currentType;
+  String currentTypeCable;
   List<Connection> allConnection = [new Connection(0, 1, 1)];
   int connectionCardIDCount = 0;
   Widget otherTypeField =
@@ -106,12 +107,18 @@ class _NewPointScreenState extends State<NewPointScreen> {
     });
   }
 
+void dropDownButtonCable (String newValueSelected) {
+    setState(() {
+      currentTypeCable = newValueSelected;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       resizeToAvoidBottomInset: true,
       appBar: AppBar(
-        title: AppBarText("New Test Point"),
+        title: Text("New Test Point", style:appBar),
       ),
       body: new ListView.builder(
           scrollDirection: Axis.vertical,
@@ -158,14 +165,14 @@ class _NewPointScreenState extends State<NewPointScreen> {
                                           'Test Point Name', 'eg. TP-01')),
                                   new Container(
                                     alignment: FractionalOffset.centerLeft,
-                                    child: new FormLabel('Test Point Type'),
+                                    child: new Text('Test Point Type', style: formLabel),
                                   ),
                                   new OptionField(typeSelected, 'Select Type',
                                       currentType, tpTypes),
                                   otherTypeField,
                                   new Container(
                                     alignment: FractionalOffset.centerLeft,
-                                    child: new FormLabel('GPS Coordinates'),
+                                    child: new Text('GPS Coordinates', style: formLabel),
                                   ),
                                   new Row(
                                     mainAxisAlignment: MainAxisAlignment.start,
