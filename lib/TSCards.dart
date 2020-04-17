@@ -2,13 +2,20 @@ import 'package:flutter/material.dart';
 import 'package:mary_jane/style.dart';
 import 'DropdownButton.dart';
 import 'Button.dart';
+typedef remCon = void Function(int id);
 
 class TSPipelineCard extends StatefulWidget {
+final int id;
+final remCon removeConnection;
+  const TSPipelineCard (this.id, this.removeConnection);
   @override
-  _TSPipelineCardState createState() => _TSPipelineCardState();
+  _TSPipelineCardState createState() => _TSPipelineCardState(id, removeConnection);
 }
 
 class _TSPipelineCardState extends State<TSPipelineCard> {
+  final int id;
+  final remCon removeConnection;
+  _TSPipelineCardState (this.id,this.removeConnection);
   String currentPipeline;
   String currentCableSize;
   String currentCableColor;
@@ -33,6 +40,7 @@ class _TSPipelineCardState extends State<TSPipelineCard> {
     'Black',
     'Purple'
   ];
+bool isExpanded;
 
   final List<String> pipelineList = [
     '63532-21',
@@ -57,18 +65,41 @@ class _TSPipelineCardState extends State<TSPipelineCard> {
       currentCableColor = newValueSelected;
     });}
 
+  void initState() {
+    this.isExpanded = true;
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return new Container(
         //block of lable and field
         alignment: FractionalOffset.center,
         child: new Card(
-            child: new Container(
+            child: ExpansionPanelList(
+              expansionCallback: (int index, bool isExpanded) {
+                setState(() {
+                  this.isExpanded = !isExpanded;
+                });
+              },
+        children: <ExpansionPanel>[
+          new ExpansionPanel(
+            headerBuilder: (BuildContext context, bool isExpanded) =>
+          new Container(
+          //block of lable and field
+          alignment: FractionalOffset.center, child: new Row (children: [SizedBox( width: 140, child: Container(alignment: FractionalOffset.centerLeft, margin: EdgeInsets.only(left: 15), child: SizedBox(
+              width: 35,
+              child: RawMaterialButton(
+                onPressed: (){removeConnection(id);},
+                child: new Icon(Icons.delete),
+                shape: new CircleBorder(),
+              )))), Expanded(child: new Text('Pipeline#1', style: h2))]),),
+            body:
+            new Container(
                 padding: const EdgeInsets.only(
-                    left: 10.0, top: 13.0, right: 10.0, bottom: 10.0),
+                    left: 10.0, right: 10.0, bottom: 10.0),
                 child: new Column(children: [
-                  new Text('Pipeline#1', style: h2),
-                  new Divider(),
+
                   new Row(
                       mainAxisAlignment: MainAxisAlignment.start,
                       children: [
@@ -170,6 +201,13 @@ new Container( child: new Column( mainAxisAlignment: MainAxisAlignment.center,
                   Container(
                       margin: const EdgeInsets.only(top: 5, bottom: 10),
                       child: new TFieldLable('Cable Tag',''))
-                ]))]))));
+                ]))])),
+      isExpanded: this.isExpanded,
+    ),
+    ],
+            ),
+
+
+        ));
   }
 }

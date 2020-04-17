@@ -10,28 +10,30 @@ Map<String, List<String>> supportedTypes = {
   'Junction Box': ['Pipeline', 'Shunt', 'Anode', 'Coupon']
 };
 
-class Connection {
-  //class connection created when new connection is added to the screen. used as 1st stage before saving data to the main file
-  int id;
-  int connectionType;
-  int parentType;
-  Widget connectionCard;
-
-  Connection(this.id, this.connectionType, this.parentType);
-
-  Widget assignCard(int connectionType, int parentType) {
-    Widget returnCard;
-    if (connectionType == 1 && parentType == 1) {
-      returnCard = new TSPipelineCard();
-    }
-    return returnCard;
-  }
-}
 
 class NewPointScreen extends StatefulWidget {
   @override
   _NewPointScreenState createState() => _NewPointScreenState();
 }
+
+class Connection {
+  //class connection created when new connection is added to the screen. used as 1st stage before saving data to the main file
+  int id;
+  int connectionType;
+  int parentType;
+  remCon removeConnection;
+
+  Connection(this.id, this.connectionType, this.parentType, this.removeConnection);
+
+  Widget assignCard(int connectionType, int parentType) {
+    Widget returnCard;
+    if (connectionType == 1 && parentType == 1) {
+      returnCard = new TSPipelineCard(id,removeConnection);
+    }
+    return returnCard;
+  }
+}
+
 
 class _NewPointScreenState extends State<NewPointScreen> {
   final List<String> tpTypes = [
@@ -42,13 +44,10 @@ class _NewPointScreenState extends State<NewPointScreen> {
   ];
   String currentType;
   String currentTypeCable;
-  List<Connection> allConnection = [new Connection(0, 1, 1)];
+  List<Connection> allConnection = [];
   int connectionCardIDCount = 0;
-  Widget otherTypeField =
-      new Container(); // empty when Other option is not Selected
-  List<Widget> connectionCards = [
-    new TSPipelineCard()
-  ]; // List of connection cards, displayed on the screen
+  Widget otherTypeField = new Container(); // empty when Other option is not Selected
+  List<Widget> connectionCards = []; // List of connection cards, displayed on the screen
 
   void test() {
     print('hello');
@@ -56,24 +55,42 @@ class _NewPointScreenState extends State<NewPointScreen> {
 
   void addConnection(int connectionType, int parentType) {
     connectionCardIDCount++;
-    Navigator.of(context, rootNavigator: true).pop('/NTS'); //Remove Dialog Screen. Check when root Navigator changes!!!!
-    allConnection
-        .add(new Connection(connectionCardIDCount, connectionType, parentType));
-    print(allConnection[1].id);
+    allConnection.add(new Connection(connectionCardIDCount-1, connectionType, parentType,removeConnection));
     setState(() {
       connectionCards
           .add(allConnection.first.assignCard(connectionType, parentType));
     });
   }
 
+  void removeConnection(int connectionId) {
+    print('it works');
+allConnection.removeAt(connectionId);
+    for(var i = 0; i<allConnection.length; i++) {
+      if (allConnection[i].id > connectionId )
+        {
+          allConnection[i].id--;
+        }
+    }
+    setState(() {
+      connectionCards
+          .removeAt(connectionId);
+    });
+    connectionCardIDCount--;
+  }
+
+
+
+
+
   void optionsConnection() {
     List<SimpleDialogOption> genOptionList(List<String> listOfItems) {
-      //Generate list of options based on the list of string provided for the Dialog screen
+      //Generate list of options of connections based on the list of string provided for the Dialog screen
       List<SimpleDialogOption> listOfOptions =
           listOfItems.map((String optionItem) {
         return SimpleDialogOption(
           onPressed: () {
-            addConnection(1, 1);
+            Navigator.of(context, rootNavigator: true).pop('/NTS'); //Remove Dialog Screen. Check when root Navigator changes!!!!
+            addConnection(1, 1);  //************************************
           },
           child: Text(optionItem),
         );
@@ -128,7 +145,7 @@ void dropDownButtonCable (String newValueSelected) {
               left: 8.0,
               right: 8.0,
               bottom: 16.0), // Padding for body area
-          itemCount: connectionCards.length,
+          itemCount: connectionCardIDCount+1,
           itemBuilder: (context, index) {
             if (index == 0) {
               return new Column(
@@ -232,7 +249,7 @@ void dropDownButtonCable (String newValueSelected) {
                     //----------------------------------------------------------------------------------------------------------
                   ]);
             } else
-              return connectionCards[index - 1];
+              return connectionCards[index-1];
           }),
     );
   }

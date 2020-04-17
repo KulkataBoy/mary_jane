@@ -7,7 +7,7 @@ class ListOptionSetting {
 
   List<DropdownMenuItem<String>> genList(List<String> listOfItems,
       int typeOfGen) {
-    //gen 1 adds Select Type Lable at the begining of the list of data
+    //gen 1 adds Select Type Lable at the beginning of the list of data
     List<DropdownMenuItem<String>> listOfItemsRes;
     if (typeOfGen == 1) {
       listOfItemsRes = listOfItems.map((

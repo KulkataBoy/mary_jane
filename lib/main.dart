@@ -11,8 +11,7 @@ void main() {
     initialRoute: '/',
     routes: {
       '/': (context) => Menu(),
-      '/NPS': (context) => PointScreen(),
-      '/NTS': (context) => NewTankSurvey(),
+      '/NTS': (context) =>  NewPointScreen(),
     },
     debugShowCheckedModeBanner: false,
 
@@ -391,147 +390,19 @@ Map<String, dynamic> _rectifierCircuitToJson(RectifierCircuit ins) {
   };
 }
 
-class PointScreen extends StatefulWidget {
-  @override
-  State<StatefulWidget> createState() {
-    return _PointScreenState();
-  }
-}
-List<String> _tpTypes = ['Rubles', 'Dollars', 'Pounds', 'Other'];
-
-
-
-class _PointScreenState extends State<PointScreen> {
-  var _currentTPType = 'Select Type';
-  Widget otherTypeField = new Container();
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text("New Point",style: appBar),
-      ),
-      body: new Container(
-        padding: const EdgeInsets.only(top: 6.0, left: 8.0, right: 8.0, bottom: 16.0),  // Padding for body area
-      child: new Column (
-          crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          new Container( //Status Bar at the top Modified | Created
-            margin: const EdgeInsets.only(bottom: 9.0),
-            alignment: FractionalOffset.centerLeft,
-            child: new Text('Modified | Created:', style: statusText),
-          ),
-
-        //-----------------------------------------------------------------------------------------------------------
-
-          new Container( //block of lable and field
-            alignment: FractionalOffset.center,
-
-              child: Card(
-                  child: new Container(
-                    padding: const EdgeInsets.only(left: 10.0, top: 13.0, right: 10.0, bottom: 10.0),
-                    child: new Column (
-                  children: [new TFieldLable('Name', 'eg. TP-01'),new Container(
-                    alignment: FractionalOffset.centerLeft,
-                    child: new Text('Type', style: formLabel),
-                  ),
-
-
-
-        new Container(
-          margin: const EdgeInsets.only(top: 4.0, bottom: 13.0),
-          padding: const EdgeInsets.only(top: 8.0, left: 10.0, right: 16.0, bottom: 8.0),
-          decoration: new BoxDecoration(
-
-            borderRadius: const BorderRadius.all(
-              const Radius.circular(7),
-            ),
-            border: Border.all(
-                color: Colors.black38, width: 1.0),
-          ),
-          child:  DropdownButtonHideUnderline (
-            child: DropdownButton(
-                      icon: Icon(Icons.arrow_drop_down, color: Colors.black38),
-                      isExpanded: true,
-                      isDense: true,
-                      items:  new  ListOptionSetting().genList(_tpTypes,1),
-
-                      onChanged: (String newValueSelected) {
-                        _onDropDownItemSelected(newValueSelected);
-                      },
-
-                      value: _currentTPType,
-                      style: new TextStyle(fontSize: 16.0, fontFamily: 'LatoRegular', fontWeight: FontWeight.w300, color: Colors.black),
-
-                    ),
-                  ),
-),
-                    otherTypeField,
-                    OField(1,'a',_tpTypes,_tpTypes[0]),
-
-                  ]
-              ),
-              ),
-          ),
-            ),
-
-          //----------------------------------------------------------------------------------------------------------
-
-
-        ]
-      ),
-      ),
-
-
-    );
-  }
-  void _onDropDownItemSelected(String newValueSelected) {
-    setState(() {
-      this._currentTPType = newValueSelected;
-      if (_currentTPType == 'Other') {
-        this.otherTypeField = new TField('Type Other');
-      }
-      else {
-        this.otherTypeField = new Container();
-      }
-    });
-  }
-}
-
-
-
-class NewTankSurvey extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return new NewPointScreen();
-
-  }
-}
-
 
 class Menu extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
+    @override
+    Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text("CorrSurfer v0.0.1"),
-      ),
-      body: new Container(
-      padding: new EdgeInsets.all(32.0),
+    appBar: AppBar(
+    title: Text("CorrSurfer v0.0.1"),
+    ),
+    body: new Container(
+    padding: new EdgeInsets.all(32.0),
     child: new Column (
     children: <Widget>[
-      new FlatButton (onPressed: () {Navigator.pushNamed(context, '/NPS');}, child: new Text('Roboto Mono sample',
-          style: new TextStyle(
-            color: Colors.black87,
-            fontFamily: 'LatoRegular',
-            fontWeight: FontWeight.w700,
-            fontSize: 25.0,
-          )), ),
-      new FlatButton (onPressed: () {Navigator.pushNamed(context, '/NTS');}, child: new Text('Tank Survey', style:h1)),
-        new Text(
-          'FontThin',
-          style: TextStyle(fontFamily: 'LatoThin', fontSize: 25.0, fontWeight: FontWeight.w100,),
-        ),
-      OField(1,'a',_tpTypes,_tpTypes[0])
-
+    new FlatButton (onPressed: () {Navigator.pushNamed(context, '/NTS');}, child: new Text('Pipeline Survey', style:h2)),
     ])
     )
     );
